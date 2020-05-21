@@ -1,0 +1,65 @@
+body {
+    background: #C4D3F6;
+    color: black;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+
+
+#name,
+#file_1,
+#file_2 {
+    font-size: 16pt;
+}
+
+#file1,
+#file2 {
+    font-size: 13pt;
+}
+
+#file_1 .file-input,
+#file_2 .file-input {
+    display: none;
+}
+
+
+.row i:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.side {
+    float: left;
+    padding: 10px;
+    height: 625px;
+}
+
+#side1 {
+    border-bottom: 3px dashed black;
+    border-left: 3px dashed black;
+    border-top: 3px dashed black;
+    width: 40%;
+}
+
+#side2 {
+    border: 3px dashed black;
+    width: 60%;
+    overflow-y: auto;
+    padding-left: 5%;
+}
+
+#side1 button {
+    margin-top: 5%;
+    margin-left: 35%;
+    width: 20%;
+}
+
+#logout{
+    margin-left: 85%;
+}
+
+#tbl_1{
+    margin-left: 15%;
+    margin-top: 5%;
+}

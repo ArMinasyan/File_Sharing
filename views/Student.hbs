@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Table V02</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/student.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(document).on('click', 'span', function (e) {
+				window.location = "/download/" + $(this).attr('name');
+			});
+
+			//	$(document).on('click', '#upload', function (e) {
+			//window.location = "/download/" + $(this).attr('name');
+			//	alert('Upload file');
+			//	});
+
+			$.ajax({
+				url: "http://localhost:3000/data_for_student",
+				type: 'post',
+				dataType: 'json',
+				data: 'true',
+				success: function (result) {
+					console.log(result.data);
+					for (var index = 0; index < result.data.file_name.length; index += 2) {
+
+
+						$('#table').append(
+							'<div class="row">' +
+							'<div class="cell" style="text-align:center">' +
+							JSON.stringify(result.data.group_number1) +
+							'</div>' +
+							'<div class="cell" style="text-align:center">' +
+							JSON.stringify(result.data.lecturer) +
+							'</div>' +
+							'<div class="cell" style="text-align:center">' +
+							'<span name=' + result.data.file_link[index] + ' id=' + result.data.file_link[index] + '>' + JSON.stringify(result.data.file_name[index]) + '</span>' +
+							'</div>' +
+
+							'<div class="cell" style="text-align:center">' +
+							'<span  name=' + result.data.file_link[index + 1] + ' id=' + result.data.file_link[index + 1] + '>' + JSON.stringify(result.data.file_name[index + 1]) + '</span>' +
+							'</div>' +
+							'<div class="cell" id="image">' +
+							'<input type="file" name="file" id="file" style="display: none;">' +
+							'<label class="btn btn-primary" id="upload" for="file" style="margin-left:30%;">' +
+							'Վերբեռնել' +
+							'</label>' +
+							'</div>'
+						)
+
+					}
+				}
+			})
+		});
+
+
+
+	</script>
+</head>
+
+<body>
+
+	<div>
+		<form id="form" method="POST" action="/logout">
+			<button type="submit" class="btn btn-primary" id="logout">Դուրս գալ</button>
+		</form>
+	</div>
+	<div class="limiter">
+		<div class="container-table">
+			<div class="wrap-table">
+				<div class="table" id="table">
+
+					<div class="row header">
+						<div class="cell" style="text-align:center; width:15%; font-size:12pt">
+							Առարկա
+						</div>
+						<div class="cell" style="text-align:center; width:20%; font-size:12pt">
+							Դասախոս
+						</div>
+						<div class="cell" style="text-align:center; width:23%;font-size:12pt">
+							Տեսական նյութ
+						</div>
+						<div class="cell" style="text-align:center; width:23%; font-size:12pt">
+							Գործնական նյութ
+						</div>
+						<div class="cell" style="text-align:center; font-size:12pt">
+							Վերբեռնել գործնական նյութը
+						</div>
+					</div>
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+
+</html>

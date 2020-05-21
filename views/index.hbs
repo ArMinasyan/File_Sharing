@@ -1,0 +1,68 @@
+﻿<html>
+
+<head>
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../public/javascripts/validation.js"></script>
+    <link rel="stylesheet" href="../public/stylesheets/index.css">
+    <script>
+		$(document).ready(function () {
+
+
+			$('#reg2').hover(function () {
+			//	$('#registration').css('display', 'block');
+				$('#login').css('display', 'none');
+				$('#log_reg1').css('margin-top', '0.5%');
+				$('#registration').show();
+			});
+
+			$('#log1').hover(function () {
+				$('#registration').css('display', 'none');
+				$('#login').css('display', 'block');
+			});
+
+			$('#log1').click(function(){
+				$('#log-form').submit();
+			})
+		});
+	</script>
+</head>
+
+<body>
+    
+	<fieldset id="registration" style="height:150px; display: none;">
+		<div><input type="text" id="fname" class="form-control" placeholder="Անուն"></div>
+		<div><input type="text" id="lname" class="form-control" placeholder="Ազգանուն"></div>
+		<div><input type="text" id="patr" class="form-control" placeholder="Հայրանուն"></div>
+		<div><input type="text" id="gnum" class="form-control" placeholder="Խմբի համար"></div>
+		<div><input type="text" id="bday" class="form-control" placeholder="Ծննդյան օր․ամիս․տարի"></div>
+		<div><input type="text" id="email" class="form-control" placeholder="Էլ․ փոստ"></div>
+		<div><input type="password" id="pswd1" class="form-control" placeholder="Ծածկագիր"></div>
+		<div><input type="password" id="pswd2" class="form-control" placeholder="Կրկնել ծածկագիրը"></div>
+		<div id="log_reg1">
+			<input type="submit" id="log1" class="btn btn-primary" value="Մուտք">
+			<input type="submit" id="reg1" class="btn btn-primary" value="Գրանցվել">
+		</div>
+	</fieldset>
+
+	<fieldset id="login" style="height:150px;">
+        <form action="/login" method="POST" id="log-form">
+		<div><input type="text" id="email1" class="form-control" placeholder="Մուտքանուն" name="username"></div>
+		<div><input type="password" id="pswd3" class="form-control" placeholder="Ծածկագիր" name="password"></div>
+		
+		<div id="log_reg1">
+			<input type="submit" id="log2" class="btn btn-primary" value="Մուտք">
+			<input type="submit" id="reg2" class="btn btn-primary" value="Գրանցվել">
+		</div>
+		</form>
+        
+        
+		
+	</fieldset>
+	
+
+</body>
+
+</html>
