@@ -22,8 +22,8 @@ app.set('view engine', 'hbs');
 app.use(
     session({
         secret: secret(10),
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
         group_number: String,
         students: Array,
     })
@@ -31,6 +31,13 @@ app.use(
 
 
 var User = require('./passport.js');
+//connect to mongodb
+
+mongoose.connect('mongodb://localhost:27017/user3', {
+    useNewUrlParser: true
+});
+///
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.get('/', function (req, res) {
@@ -121,7 +128,6 @@ app.get('/student', function (req, res) {
 
 /////////////////////////////////////////////////////
 app.post('/logout', function (req, res) {
-    mongoose.connection.close();
     req.logOut();
     res.redirect('/');
 });
@@ -129,18 +135,14 @@ app.post('/logout', function (req, res) {
 ////////////////
 
 app.post('/admin_data', function (req, res) {
-    mongoose.connect('mongodb://localhost:27017/user3', {
-        useNewUrlParser: true
-    });
+
     admin.find({ type: 'lecturer' }, function (err, result) {
         res.json({ result: result });
     })
 });
 //////////////////////////////
 app.post('/add_user', function (req, res) {
-    mongoose.connect('mongodb://localhost:27017/user3', {
-        useNewUrlParser: true
-    });
+
     var data = req.body.d1;
 
     for (var index = 0; index < req.body.len; index++) {
@@ -197,7 +199,6 @@ var storage = multer.diskStorage({
     }
 })
 
-var data1, data2 = [];
 var upload = multer({ storage: storage }).array('file', 2);
 
 app.post('/upload1', upload, (req, res, next) => {
