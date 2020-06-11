@@ -132,7 +132,7 @@ app.post('/admin_data', function (req, res) {
     mongoose.connect('mongodb://localhost:27017/user3', {
         useNewUrlParser: true
     });
-    admin.find({type:'lecturer'},function (err, result) {
+    admin.find({ type: 'lecturer' }, function (err, result) {
         res.json({ result: result });
     })
 });
@@ -154,12 +154,12 @@ app.post('/add_user', function (req, res) {
                 type: 'lecturer',
                 flp: data[index].flp,
             }, {
-                    upsert: true,
-                    new: true,
-                    overwrite: true
-                }, function (err, res) {});
+                upsert: true,
+                new: true,
+                overwrite: true
+            }, function (err, res) { });
         }
-        else if (data[index].type == 2) admin.findByIdAndDelete(data[index].id, function (err, doc) {  })
+        else if (data[index].type == 2) admin.findByIdAndDelete(data[index].id, function (err, doc) { })
         else if (data[index].type == 3) {
             const hash2 = crypto.createHash('sha256').update(data[index].pass).digest('hex');
             admin.insertMany({
@@ -185,7 +185,11 @@ app.post('/allow_file', function (req, res) {
 ///////////////////////////////////////////////////////////////////////
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/' + req.user.group_number)
+        if (fs.existsSync(__dirname + '/upload')) cb(null, 'uploads/' + req.user.group_number);
+        else {
+            fs.mkdirSync(__dirname + '/upload');
+            cb(null, 'uploads/' + req.user.group_number);
+        }
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname.replace(' ', '_'));
